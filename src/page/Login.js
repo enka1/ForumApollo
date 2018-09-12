@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 
-import {LoginForm} from '../components'
+import {Login} from '../containers'
 
 export default class extends Component {
   render() {
     return (
       <LoginPage className="row w-100 m-0">
         <div className="login-gem-box col-lg-3">
-          <LoginForm/>
+          <Login/>
         </div>
       </LoginPage>
     )

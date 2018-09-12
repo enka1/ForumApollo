@@ -3,7 +3,7 @@ import moment from 'moment'
 import {Avatar} from 'antd'
 import styled from 'styled-components'
 
-export default class CardItem extends Component {
+export default class extends Component {
   render() {
     return (
       <CardStyle className="row">
@@ -12,10 +12,10 @@ export default class CardItem extends Component {
             size="large"
             className="mr-3"
             shape="circle"
-            src={'https://i.pinimg.com/originals/c4/4e/60/c44e60b75a7f934f442520a5214839b1.jpg'}/>
+            src={this.props.post.creator.avatar}/>
           <div>
-            <p className="title">[Passport.JS] Hỏi về authenticate cho route group</p>
-            <p className="text-muted small m-0 lead">{moment().fromNow()}</p>
+            <p className="title">{this.props.post.title}</p>
+            <p className="text-muted small m-0 lead">{moment(this.props.post.created_at).fromNow()}</p>
           </div>
         </div>
         <div className="col-4 text-center">

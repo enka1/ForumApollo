@@ -1,24 +1,38 @@
 import React, {Component} from 'react'
+import {graphql, compose} from 'react-apollo'
+import axios from 'axios'
 
 import {LoginBtnGroup, UserInfo} from '../components'
-import {log_out} from '../actions/authenticate/log_out.action'
-
+import USER_QUERY from '../graphql/query/client/user.query'
+import saveUser from '../graphql/mutation/client/save_user.mutation'
 class UserState extends Component {
-  constructor(props) {
+  constructor(props){
     super(props)
-    this.logOut = this
-      .logOut
-      .bind(this)
+    this.logOut = this.logOut.bind(this)
   }
   logOut() {
+    axios.get('/logout')
+    localStorage.setItem('auth', null)
     this
       .props
-      .dispatch(log_out())
+      .saveUser({
+        variables: {
+          username: null,
+          display_name: null,
+          avatar: null
+        }
+      })
   }
   render() {
-    if (this.props.user._id) 
-      return (<UserInfo logOut={this.logOut} user={this.props.user}/>)
+    if (this.props.user.username) 
+      return (<UserInfo user={this.props.user} logOut={this.logOut}/>)
     else 
       return <LoginBtnGroup/>
   }
 }
+
+export default compose(graphql(saveUser, {name: 'saveUser'}), graphql(USER_QUERY, {
+  props: ({data: {
+      user
+    }}) => ({user})
+}))(UserState)

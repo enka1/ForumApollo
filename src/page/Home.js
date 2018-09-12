@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 
-import {UserStateController} from '../containers'
-import {CardList} from '../components'
+import {UserStateController, PostList} from '../containers'
 
 export default class extends Component {
   render() {
@@ -13,7 +12,7 @@ export default class extends Component {
         <div className="container">
           <div className="row">
             <div className="col-8">
-              <CardList/>
+              <PostList/>
             </div>
           </div>
         </div>

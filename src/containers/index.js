@@ -1,3 +1,5 @@
 import UserStateController from './UserState'
+import PostList from './PostList'
+import Login from './LoginContainer'
 
-export {UserStateController}
+export {UserStateController, PostList, Login}

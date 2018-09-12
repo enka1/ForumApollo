@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import styled from 'styled-components'
-import check from 'check-types'
 
-import {loginAction} from '../../actions/authenticate/login.actions'
-
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,14 +10,22 @@ class Login extends Component {
       error: ''
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    let error = nextProps.error
+    if (error) {
+      this.setState({error})
+    }
+  }
+
   validateInput() {
-    if (check.emptyString(this.state.username) && check.emptyString(this.state.password)) {
+    if (this.state.username.length === 0 && this.state.password.length === 0) {
       this.setState({error: 'Xin nhập tên đăng nhập và mật khẩu '})
       return false
-    } else if (check.emptyString(this.state.username)) {
+    } else if (this.state.username.length === 0) {
       this.setState({error: 'Xin nhập tên đăng nhập'})
       return false
-    } else if (check.emptyString(this.state.password)) {
+    } else if (this.state.password.length === 0) {
       this.setState({error: 'Xin nhập mật khẩu'})
       return false
     } else {
@@ -29,16 +33,7 @@ class Login extends Component {
       return true
     }
   }
-  async handleLogIn() {
-    if (this.validateInput()) {
-      await this
-        .props
-        .dispatch(loginAction(this.state.username, this.state.password))
-      if (this.props.user.error) {
-        this.setState({error: this.props.user.error.msg})
-      }
-    }
-  }
+
   render() {
     return (
       <LoginForm className="shadow">
@@ -57,17 +52,24 @@ class Login extends Component {
             value={this.state.username}
             onChange={(e) => this.setState({username: e.target.value})}
             className="form-control input"
-            placeholder="Username"/>
+            placeholder="Username..."/>
         </div>
         <div className="form-group">
           <input
             value={this.state.password}
             onChange={(e) => this.setState({password: e.target.value})}
             className="form-control input"
-            placeholder="Password"
-            type="password"/>
+            type="password"
+            placeholder="Password...."
+            onKeyUp={(e) => {
+            if (e.keyCode === 13) {
+              this
+                .props
+                .handleLogIn(this.state.username, this.state.password)
+            }
+          }}/>
         </div>
-        {check.nonEmptyString(this.state.error) && (
+        {this.state.error && (
           <p className="small mt-2 pl-1 text-left text-danger">
             <i className="mr-1 fas fa-exclamation-circle"></i>
             {this.state.error}</p>
@@ -75,7 +77,7 @@ class Login extends Component {
         <div className="form-group">
           <div
             className="btn btn-dark btn-block button"
-            onClick={() => this.handleLogIn()}>Log In</div>
+            onClick={() => this.props.handleLogIn(this.state.username, this.state.password)}>Log In</div>
         </div>
         <a href="">Forgot your password ?</a>
       </LoginForm>
@@ -106,9 +108,3 @@ const LoginForm = styled.div `
     cursor: pointer;
   }
 `
-
-const mapStateToProps = (state) => {
-  return {user: state.user}
-}
-
-export default connect(mapStateToProps)(Login)
