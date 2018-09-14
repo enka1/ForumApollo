@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {Avatar, Menu, Dropdown, Icon, Popover} from 'antd'
+import {Avatar, Menu, Dropdown, Icon} from 'antd'
 import styled from 'styled-components'
+import {AddNewPost} from '../../components'
 class UserController extends Component {
-
   render() {
     return (
       <Menu className="mt-2 p-0">
@@ -41,41 +41,16 @@ export default class extends Component {
             shape="circle"
             src={this.props.user.avatar}/>
         </Dropdown>
-        <AddNewStyle>
-          <Popover
-            placement="topRight"
-            content={(
-            <p
-              className="small font-weight-bold"
-              style={{
-              maxWidth: 15 + 'rem'
-            }}>&ensp;Hãy
-              bắt đầu một chủ đề mới nào! Chúng tôi tin chắc bạn sẽ được sự giúp đỡ và hỗ trợ
-              nhiệt tình từ cộng đồng 😊 😊 😊
-              <br/>
-              &ensp;Những lời nói cảm ơn chân thành sẽ giúp mọi người gần nhau hơn đó 😉
-            </p>
-          )}
-            title="Tạo bài viết mới">
-            <Icon type="plus-circle" theme="outlined" className="add-new-icon"/>
-          </Popover>
-
-        </AddNewStyle>
+        <AddNewBtn>
+          <AddNewPost/>
+        </AddNewBtn>
       </div>
     )
   }
 }
 
-const AddNewStyle = styled.div `
+const AddNewBtn = styled.div `
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  .add-new-icon{
-    cursor: pointer;
-    color: #ef9a9a;
-    font-size: 2.7rem;
-  }
-  .add-new-icon:hover{
-    color:#e53935;
-  }
 `
