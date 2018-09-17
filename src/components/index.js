@@ -4,5 +4,6 @@ import UserInfo from './app/UserInfo'
 import TopicItem from './card/TopicItem'
 import AddNewPost from './button/AddNewPost'
 import PostForm from './input/PostForm'
+import Menu from './menu/ForumMenu'
 
-export {LoginForm, LoginBtnGroup, UserInfo, TopicItem, AddNewPost, PostForm}
+export {LoginForm, LoginBtnGroup, UserInfo, TopicItem, AddNewPost, PostForm, Menu}

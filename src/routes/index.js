@@ -7,19 +7,14 @@ import axios from 'axios'
 import {HomePage, LoginPage} from '../page'
 import {fetch_user} from '../methods'
 import saveUser from '../graphql/mutation/client/save_user.mutation'
+import attachMenu from '../mixin/AttachMenu'
 
 export const history = createBrowserHistory()
 class RouteController extends Component {
   async componentDidMount() {
     let user = await fetch_user()
     if (user) 
-      this.props.saveUser({
-        variables: {
-          username: user.username,
-          display_name: user.display_name,
-          avatar: user.avatar
-        }
-      })
+      this.props.saveUser({variables: user})
     else {
       let token = localStorage.getItem('auth')
       if (token) {
@@ -34,13 +29,7 @@ class RouteController extends Component {
           user = await fetch_user()
           this
             .props
-            .saveUser({
-              variables: {
-                username: user.username,
-                display_name: user.display_name,
-                avatar: user.avatar
-              }
-            })
+            .saveUser({variables: user})
         }
       }
     }
@@ -49,7 +38,7 @@ class RouteController extends Component {
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
+          <Route exact path="/" component={attachMenu(HomePage)}/>
           <Route exact path="/login" component={LoginPage}/>
         </Switch>
       </Router>

@@ -7,10 +7,11 @@ export default class extends Component {
   render() {
     return (
       <CardStyle className="row">
-        <div className="col-8 d-flex align-content-center p-0">
+        <div className="col-8 d-flex align-content-center p-0" title={this.props.post.creator.display_name}>
           <Avatar
+            alt={this.props.post.creator.display_name}
             size="large"
-            className="mr-3"
+            className="mr-3 user"
             shape="circle"
             src={this.props.post.creator.avatar}/>
           <div>
@@ -46,5 +47,8 @@ const CardStyle = styled.div `
     margin:0;
     color: #009688;
     font-weight: bold;
+  }
+  .user{
+    cursor: pointer
   }
 `

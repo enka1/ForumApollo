@@ -6,9 +6,11 @@ import {LoginBtnGroup, UserInfo} from '../components'
 import USER_QUERY from '../graphql/query/client/user.query'
 import saveUser from '../graphql/mutation/client/save_user.mutation'
 class UserState extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.logOut = this.logOut.bind(this)
+    this.logOut = this
+      .logOut
+      .bind(this)
   }
   logOut() {
     axios.get('/logout')
@@ -17,6 +19,7 @@ class UserState extends Component {
       .props
       .saveUser({
         variables: {
+          _id: null,
           username: null,
           display_name: null,
           avatar: null
@@ -24,7 +27,7 @@ class UserState extends Component {
       })
   }
   render() {
-    if (this.props.user.username) 
+    if (this.props.user.id) 
       return (<UserInfo user={this.props.user} logOut={this.logOut}/>)
     else 
       return <LoginBtnGroup/>

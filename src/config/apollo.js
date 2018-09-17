@@ -6,11 +6,13 @@ import {withClientState} from 'apollo-link-state'
 import USER_QUERY from '../graphql/query/client/user.query'
 
 const cache = new InMemoryCache()
+cache.reset()
 const clientState = withClientState({
   cache,
   defaults: {
     user: {
       __typename: 'AuthenticateUser',
+      id: null,
       username: null,
       display_name: null,
       avatar: null
