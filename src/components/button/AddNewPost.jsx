@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Popover, Icon} from 'antd'
+import {Popover} from 'antd'
 import styled from 'styled-components'
 
 import {PostForm} from '../'
@@ -38,11 +38,10 @@ export default class extends Component {
           </p>
         )}
           title="Tạo bài viết mới">
-          <Icon
-            type="plus-circle"
+          <button
             onClick={() => this.openPostForm()}
-            theme="outlined"
-            className="add-new-icon"/>
+            className="lead btn btn-outline-success button">
+            <i className="fas fa-plus mr-2"></i>Thêm bài viết mới</button>
         </Popover>
         <PostForm
           closePostForm={this.closePostForm}
@@ -53,12 +52,7 @@ export default class extends Component {
 }
 
 const AddNewPostStyle = styled.div `
-    .add-new-icon{
-        cursor: pointer;
-        color: #ef9a9a;
-        font-size: 2.7rem;
-    }
-    .add-new-icon:hover{
-        color:#e53935;
+    .button{
+      font-size: .8rem;
     }
 `

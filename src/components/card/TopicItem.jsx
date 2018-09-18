@@ -3,19 +3,30 @@ import moment from 'moment'
 import {Avatar} from 'antd'
 import styled from 'styled-components'
 
+import {history} from '../../routes'
+
 export default class extends Component {
   render() {
     return (
       <CardStyle className="row">
-        <div className="col-8 d-flex align-content-center p-0" title={this.props.post.creator.display_name}>
+        <div
+          className="col-8 d-flex align-content-center p-0"
+          title={this.props.post.creator.display_name}>
           <Avatar
+            onClick={() => {
+            history.push(`/user/${this.props.post.creator.id}`)
+          }}
             alt={this.props.post.creator.display_name}
             size="large"
             className="mr-3 user"
             shape="circle"
             src={this.props.post.creator.avatar}/>
           <div>
-            <p className="title">{this.props.post.title}</p>
+            <p
+              className="title"
+              onClick={() => {
+              history.push(`/post/${this.props.post.id}`)
+            }}>{this.props.post.title}</p>
             <p className="text-muted small m-0 lead">{moment(this.props.post.created_at).fromNow()}</p>
           </div>
         </div>

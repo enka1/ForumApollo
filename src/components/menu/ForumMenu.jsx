@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 
+import {history} from '../../routes'
 import {UserStateController} from '../../containers'
 
 export default class ForumMenu extends Component {
@@ -15,11 +16,9 @@ export default class ForumMenu extends Component {
               height="30"
               className="d-inline-block align-top"
               alt=""/>
-            <span className="lead ml-3">Remmie</span>
+            <span className="lead ml-3 brand" onClick={() => history.push('/')}>Remmie</span>
           </span>
-
           <UserStateController/>
-
         </div>
       </Menu>
     )
@@ -28,4 +27,8 @@ export default class ForumMenu extends Component {
 
 const Menu = styled.nav `
   border-bottom: 0.2px solid #ce93d8;
+  .brand:hover{
+    cursor:pointer;
+    color: #ff8a65;
+  }
 `

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Avatar, Menu, Dropdown, Icon} from 'antd'
-import styled from 'styled-components'
-import {AddNewPost} from '../../components'
+
 class UserController extends Component {
   render() {
     return (
@@ -41,16 +40,7 @@ export default class extends Component {
             shape="circle"
             src={this.props.user.avatar}/>
         </Dropdown>
-        <AddNewBtn>
-          <AddNewPost/>
-        </AddNewBtn>
       </div>
     )
   }
 }
-
-const AddNewBtn = styled.div `
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-`

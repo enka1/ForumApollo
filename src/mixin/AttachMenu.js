@@ -8,7 +8,7 @@ export default function (WrappedComponent) {
       return (
         <div>
           <Menu/>
-          <WrappedComponent/>
+          <WrappedComponent {...this.props}/>
         </div>
       )
     }

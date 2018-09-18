@@ -2,8 +2,9 @@ import LoginForm from './input/Login'
 import LoginBtnGroup from './button/LoginBtn'
 import UserInfo from './app/UserInfo'
 import TopicItem from './card/TopicItem'
-import AddNewPost from './button/AddNewPost'
+import AddNewPostBtn from './button/AddNewPost'
 import PostForm from './input/PostForm'
 import Menu from './menu/ForumMenu'
+import CardItem from './card/CardItem'
 
-export {LoginForm, LoginBtnGroup, UserInfo, TopicItem, AddNewPost, PostForm, Menu}
+export {LoginForm, LoginBtnGroup, UserInfo, TopicItem, AddNewPostBtn, PostForm, Menu, CardItem}
