@@ -7,17 +7,18 @@ import {UserStateController} from '../../containers'
 export default class ForumMenu extends Component {
   render() {
     return (
-      <Menu className="navbar px-5 py-3">
-        <div className="container">
-          <span className="navbar-brand" href="#">
-            <img
-              src="https://image.flaticon.com/icons/png/512/284/284772.png"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt=""/>
-            <span className="lead ml-3 brand" onClick={() => history.push('/')}>Remmie</span>
-          </span>
+      <Menu className="navbar px-5 py-3 d-flex align-items-center">
+
+        <span className="navbar-brand" href="#">
+          <img
+            src="https://image.flaticon.com/icons/png/512/284/284772.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt=""/>
+          <span className="lead ml-3 brand" onClick={() => history.push('/')}>Remmie</span>
+        </span>
+        <div className="ml-auto">
           <UserStateController/>
         </div>
       </Menu>

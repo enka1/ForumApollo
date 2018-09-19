@@ -8,41 +8,43 @@ import {history} from '../../routes'
 export default class CardItem extends Component {
   render() {
     return (
-      <CardStyle className="row">
-        <div className="container border-bot">
-          <div className="row">
-            <div
-              className="col-1 justify-content-end d-flex p-0"
-              title={this.props.display_name}>
+      <CardStyle>
+        <div className={this.props.border
+          ? "border-bot"
+          : ""}>
+          <div className="d-flex">
+            <div title={this.props.display_name}>
               <Avatar
-                onClick={()=>{
-                    history.push(`/user/${this.props.userID}`)
-                }}
+                onClick={() => {
+                history.push(`/user/${this.props.userID}`)
+              }}
                 alt={this.props.display_name}
                 size="large"
-                className="user"
+                className="user mr-3"
                 shape="circle"
                 src={this.props.avatarURL}/>
             </div>
-            <div className="col-8">
-              <div>
-                <p className="title">{this.props.title}</p>
-                <p className="text-muted small m-0 lead">{moment(this.props.createdAt).fromNow()}</p>
-                <div
-                  className="lead mt-2"
-                  style={{
-                  fontSize: .85 + 'rem'
-                }}>
-                  {this.props.content}
-                </div>
+            <div>
+              <p className="title">{this.props.title}</p>
+              <p className="text-muted small m-0 lead">{moment(this.props.createdAt).fromNow()}</p>
+              <div
+                className="lead mt-2"
+                style={{
+                fontSize: .85 + 'rem'
+              }}>
+                {this.props.content}
+              </div>
+              <div
+                className={"d-flex align-items-center mt-4 " + (this.props.comment
+                ? "justify-content-start"
+                : "justify-content-end")}>
+                <i className="far fa-thumbs-up mx-2 post-react"></i>
+                <i className="far fa-heart mx-2 post-react"></i>
+                <i className="far fa-thumbs-down mx-2 post-react"></i>
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-end align-items-center mt-4">
-            <i className="far fa-thumbs-up mx-2 post-react"></i>
-            <i className="far fa-heart mx-2 post-react"></i>
-            <i className="far fa-thumbs-down mx-2 post-react"></i>
-          </div>
+
         </div>
       </CardStyle>
     )

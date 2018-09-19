@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Query} from 'react-apollo'
-import {CardItem} from '../components'
+import {CardItem, CommentForm} from '../components'
 
 import {FETCH_POST_BY_ID} from '../graphql/query/server/post.query'
 export default class PostDetail extends Component {
@@ -16,16 +16,24 @@ export default class PostDetail extends Component {
             posts
           }}) => {
           if (posts) {
-
             let post = posts[0]
-            console.log(post)
-            return (<CardItem
-              title={post.title}
-              content={post.content}
-              createdAt={post.created_at}
-              avatarURL={post.creator.avatar}
-              userID={post.creator.id}
-              display_name={post.creator.display_name}/>)
+            return (
+              <div className="container px-5">
+                <CardItem
+                  border
+                  title={post.title}
+                  content={post.content}
+                  createdAt={post.created_at}
+                  avatarURL={post.creator.avatar}
+                  userID={post.creator.id}
+                  display_name={post.creator.display_name}/>
+                <CardItem
+                  comment
+                  title={"Enka"}
+                  content="I think you should try another function"/>
+                <CommentForm className="mt-3"/>
+              </div>
+            )
           }
           return null
         }}

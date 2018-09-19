@@ -21,11 +21,11 @@ class LoginContainer extends Component {
     let {data} = await axios.post('/login', {username, password})
     if (data.authenticate) {
       localStorage.setItem('auth', data.token)
-      history.push('/')
       let user = await fetch_user()
       this
         .props
         .saveUser({variables: user})
+      history.goBack()
     } else {
       this.setState({error: data.error.msg})
     }

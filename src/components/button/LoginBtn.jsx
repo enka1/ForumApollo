@@ -1,23 +1,27 @@
 import React, {Component} from 'react'
+import styled from 'styled-components'
 
 import {history} from '../../routes'
-
-const buttonStyle = {
-  width: 6 + 'rem'
-}
 
 export default class SignIn extends Component {
   render() {
     return (
       <div>
-        <div
-          className="btn px-3 btn-outline-success mr-2 lead"
-          onClick={() => {
-          history.push('/login')
-        }}
-          style={buttonStyle}>Log in</div>
-        <div className="btn px-3 btn-danger lead" style={buttonStyle}>Sign up</div>
+        <SignUpStyle className="lead mr-4" onClick={() => history.push('/login')}>
+          Đăng nhập
+        </SignUpStyle>
+        <SignUpStyle className="lead">
+          Đăng kí
+        </SignUpStyle>
       </div>
     )
   }
 }
+
+const SignUpStyle = styled.span `
+  cursor:pointer;
+  font-size: 1rem;
+  &:hover{
+    color:#ff8a65;
+  }
+`
