@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Query} from 'react-apollo'
-import {CardItem, CommentForm} from '../components'
 
+import {CommentForm, CardItem} from '../components'
+import {CommentList} from '../containers'
 import {FETCH_POST_BY_ID} from '../graphql/query/server/post.query'
 export default class PostDetail extends Component {
 
@@ -20,6 +21,9 @@ export default class PostDetail extends Component {
             return (
               <div className="container px-5">
                 <CardItem
+                  style={{
+                  paddingTop: 2 + "rem"
+                }}
                   border
                   title={post.title}
                   content={post.content}
@@ -27,11 +31,9 @@ export default class PostDetail extends Component {
                   avatarURL={post.creator.avatar}
                   userID={post.creator.id}
                   display_name={post.creator.display_name}/>
-                <CardItem
-                  comment
-                  title={"Enka"}
-                  content="I think you should try another function"/>
-                <CommentForm className="mt-3"/>
+                <CommentList post_id={this.props.match.params.id}/>
+                <CommentForm post_id={this.props.match.params.id} className="mt-5"/>
+
               </div>
             )
           }

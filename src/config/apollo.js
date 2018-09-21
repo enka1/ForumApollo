@@ -37,7 +37,7 @@ export const client = new ApolloClient({
   connectToDevTools: true,
   link: ApolloLink.from([
     clientState,
-    new HttpLink({uri: 'http://localhost:3001/graphql'})
+    new HttpLink({uri: '/graphql'})
   ]),
   cache
 })

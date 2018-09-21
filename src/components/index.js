@@ -6,7 +6,6 @@ import AddNewPostBtn from './button/AddNewPost'
 import PostForm from './input/PostForm'
 import Menu from './menu/ForumMenu'
 import CardItem from './card/CardItem'
-import CommentItem from './card/CommentItem'
 import CommentForm from './input/CommentForm'
 
 export {
@@ -17,7 +16,6 @@ export {
   AddNewPostBtn,
   PostForm,
   Menu,
-  CardItem,
-  CommentItem,
+  CardItem, 
   CommentForm
 }

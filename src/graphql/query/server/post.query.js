@@ -26,7 +26,6 @@ query postQuery($id:String!){
       avatar
     }
     title
-   
     content
     created_at
   }

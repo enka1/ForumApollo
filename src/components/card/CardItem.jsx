@@ -8,7 +8,7 @@ import {history} from '../../routes'
 export default class CardItem extends Component {
   render() {
     return (
-      <CardStyle>
+      <CardStyle className={this.props.className} style={this.props.style}>
         <div className={this.props.border
           ? "border-bot"
           : ""}>
@@ -25,8 +25,11 @@ export default class CardItem extends Component {
                 src={this.props.avatarURL}/>
             </div>
             <div>
-              <p className="title">{this.props.title}</p>
-              <p className="text-muted small m-0 lead">{moment(this.props.createdAt).fromNow()}</p>
+              <span className="title">{this.props.title}</span>
+              <span
+                className={"text-muted small m-0 lead " + ( this.props.comment
+                ? "ml-2"
+                : "d-block")}>{moment(this.props.createdAt).fromNow()}</span>
               <div
                 className="lead mt-2"
                 style={{
@@ -35,16 +38,15 @@ export default class CardItem extends Component {
                 {this.props.content}
               </div>
               <div
-                className={"d-flex align-items-center mt-4 " + (this.props.comment
-                ? "justify-content-start"
-                : "justify-content-end")}>
-                <i className="far fa-thumbs-up mx-2 post-react"></i>
-                <i className="far fa-heart mx-2 post-react"></i>
-                <i className="far fa-thumbs-down mx-2 post-react"></i>
+                className={"d-flex align-items-center" + (this.props.comment
+                ? "justify-content-start mt-3"
+                : "justify-content-end mt-4")}>
+                <i className="far fa-thumbs-up mr-2 post-react"></i>
+                <i className="far fa-heart mr-2 post-react"></i>
+                <i className="far fa-thumbs-down post-react"></i>
               </div>
             </div>
           </div>
-
         </div>
       </CardStyle>
     )
@@ -52,8 +54,6 @@ export default class CardItem extends Component {
 }
 
 const CardStyle = styled.div `
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   .title{
     margin:0;
     color: #009688;
