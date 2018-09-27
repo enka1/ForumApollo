@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import {createBrowserHistory} from 'history'
 import axios from 'axios'
 
-import {HomePage, LoginPage, PostDetailPage, UserPage} from '../page'
+import {HomePage, LoginPage, PostDetailPage, UserPage, RegisteredPage} from '../page'
 import {fetch_user} from '../methods'
 import saveUser from '../graphql/mutation/client/save_user.mutation'
 import attachMenu from '../mixin/AttachMenu'
@@ -40,6 +40,7 @@ class RouteController extends Component {
         <Switch>
           <Route exact path="/" component={attachMenu(HomePage)}/>
           <Route exact path="/login" component={LoginPage}/>
+          <Route exact path="/register" component={RegisteredPage}/>
           <Route path="/user/:id" component={attachMenu(UserPage)}/>
           <Route path="/post/:id" component={attachMenu(PostDetailPage)}/>
         </Switch>

@@ -40,7 +40,12 @@ export default class Login extends Component {
   render() {
     return (
       <LoginForm className="shadow">
-        <div className="brand" title="Nhấn vào để về trang chủ" onClick={() => {history.push('/')}}>
+        <div
+          className="brand"
+          title="Nhấn vào để về trang chủ"
+          onClick={() => {
+          history.push('/')
+        }}>
           <img
             src="https://image.flaticon.com/icons/png/512/284/284772.png"
             className="icon"
@@ -68,7 +73,7 @@ export default class Login extends Component {
             if (e.keyCode === 13) {
               this
                 .props
-                .handleLogIn(this.state.username, this.state.password)
+                .localStrategyLoginHandle(this.state.username, this.state.password)
             }
           }}/>
         </div>
@@ -80,12 +85,13 @@ export default class Login extends Component {
         <div className="form-group">
           <div
             className="btn btn-dark btn-block button"
-            onClick={() => this.props.handleLogIn(this.state.username, this.state.password)}>Log In</div>
+            onClick={() => this.props.localStrategyLoginHandle(this.state.username, this.state.password)}>Log In</div>
         </div>
         <a href="">Forgot your password ?</a>
         <Divider>Or</Divider>
         <div className="mb-3">
           <i
+            onClick={() => this.props.googleStategyLoginHandle()}
             title="Google"
             className="fab fa-google-plus-square social-icon mx-2"
             style={{

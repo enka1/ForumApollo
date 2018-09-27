@@ -7,6 +7,7 @@ import PostForm from './input/PostForm'
 import Menu from './menu/ForumMenu'
 import CardItem from './card/CardItem'
 import CommentForm from './input/CommentForm'
+import RegisteredForm from './input/Registered'
 
 export {
   LoginForm,
@@ -17,5 +18,6 @@ export {
   PostForm,
   Menu,
   CardItem, 
-  CommentForm
+  CommentForm,
+  RegisteredForm
 }

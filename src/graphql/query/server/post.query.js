@@ -11,6 +11,7 @@ export const LATEST_POST_QUERY = gql `
     }
     title
     created_at
+    numOfComments
   }
 }
 `

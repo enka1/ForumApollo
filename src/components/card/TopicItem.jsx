@@ -33,12 +33,8 @@ export default class extends Component {
         <div className="col-4 text-center">
           <div className="row">
             <div className="col">
-              <p className="h4 m-0">2</p>
+              <p className="h4 m-0">{this.props.post.numOfComments}</p>
               <p className="m-0">Answers</p>
-            </div>
-            <div className="col">
-              <p className="h4 m-0">3</p>
-              <p className="m-0">Views</p>
             </div>
           </div>
         </div>

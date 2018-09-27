@@ -10,7 +10,7 @@ export default class SignIn extends Component {
         <SignUpStyle className="lead mr-4" onClick={() => history.push('/login')}>
           Đăng nhập
         </SignUpStyle>
-        <SignUpStyle className="lead">
+        <SignUpStyle className="lead" onClick={() => history.push('/register')}>
           Đăng kí
         </SignUpStyle>
       </div>

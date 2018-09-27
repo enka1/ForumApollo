@@ -13,11 +13,14 @@ class LoginContainer extends Component {
     this.state = {
       error: ''
     }
-    this.handleLogIn = this
-      .handleLogIn
+    this.localStrategyLoginHandle = this
+      .localStrategyLoginHandle
+      .bind(this)
+    this.googleStategyLoginHandle = this
+      .googleStategyLoginHandle
       .bind(this)
   }
-  async handleLogIn(username, password) {
+  async localStrategyLoginHandle(username, password) {
     let {data} = await axios.post('/login', {username, password})
     if (data.authenticate) {
       localStorage.setItem('auth', data.token)
@@ -30,8 +33,18 @@ class LoginContainer extends Component {
       this.setState({error: data.error.msg})
     }
   }
+
+  async googleStategyLoginHandle() {
+    window
+      .location
+      .replace('http://localhost:3001/auth/google')
+  }
+
   render() {
-    return (<LoginForm error={this.state.error} handleLogIn={this.handleLogIn}/>)
+    return (<LoginForm
+      error={this.state.error}
+      googleStategyLoginHandle={this.googleStategyLoginHandle}
+      localStrategyLoginHandle={this.localStrategyLoginHandle}/>)
   }
 }
 

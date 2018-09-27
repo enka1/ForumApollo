@@ -4,7 +4,6 @@ export default gql `
     {
         user @client{
             id
-            username
             display_name
             avatar
         }
