@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {debounce} from 'lodash'
 import styled from 'styled-components'
 import {Divider} from 'antd'
 
@@ -12,6 +13,10 @@ export default class Login extends Component {
       password: '',
       error: ''
     }
+  }
+
+  usernameOnChangeHandle(event) {
+    debounce(() => this.setState({username: event.target.value}), 300)
   }
 
   componentWillReceiveProps(nextProps) {

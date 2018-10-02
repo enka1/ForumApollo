@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import {Input, Icon} from 'antd'
-import check from 'check-types'
 
 import {history} from '../../routes'
 

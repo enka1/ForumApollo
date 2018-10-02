@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {graphql, compose} from 'react-apollo'
 import {Route, Switch, Router} from 'react-router-dom'
 import {createBrowserHistory} from 'history'
-import axios from 'axios'
 
 import {HomePage, LoginPage, PostDetailPage, UserPage, RegisteredPage} from '../page'
 import {fetch_user} from '../methods'
@@ -15,24 +14,6 @@ class RouteController extends Component {
     let user = await fetch_user()
     if (user) 
       this.props.saveUser({variables: user})
-    else {
-      let token = localStorage.getItem('auth')
-      if (token) {
-        let {data} = await axios.get('/token', {
-          headers: {
-            auth: token
-          }
-        })
-        if (data.authenticate === false) 
-          localStorage.setItem('auth', null)
-        else {
-          user = await fetch_user()
-          this
-            .props
-            .saveUser({variables: user})
-        }
-      }
-    }
   }
   render() {
     return (

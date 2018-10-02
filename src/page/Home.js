@@ -1,18 +1,19 @@
 import React, {Component} from 'react'
+import styled from 'styled-components'
 
 import {PostList} from '../containers'
 import {CreatePostController} from '../containers'
 export default class extends Component {
   render() {
     return (
-      <div className="container">
+      <HomePage className="container">
         <CreatePostController/>
-        <div className="row">
-          <div className="col-8">
-            <PostList/>
-          </div>
-        </div>
-      </div>
+        <PostList/>
+      </HomePage>
     )
   }
 }
+
+const HomePage = styled.div `
+  
+`

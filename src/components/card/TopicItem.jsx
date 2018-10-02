@@ -9,10 +9,9 @@ export default class extends Component {
   render() {
     return (
       <CardStyle className="row">
-        <div
-          className="col-8 d-flex align-content-center p-0"
-          title={this.props.post.creator.display_name}>
+        <div className="col-8 d-flex align-items-center">
           <Avatar
+            title={this.props.post.creator.display_name}
             onClick={() => {
             history.push(`/user/${this.props.post.creator.id}`)
           }}
@@ -29,14 +28,33 @@ export default class extends Component {
             }}>{this.props.post.title}</p>
             <p className="text-muted small m-0 lead">{moment(this.props.post.created_at).fromNow()}</p>
           </div>
-        </div>
-        <div className="col-4 text-center">
-          <div className="row">
-            <div className="col">
-              <p className="h4 m-0">{this.props.post.numOfComments}</p>
-              <p className="m-0">Answers</p>
-            </div>
+          <div className="ml-auto lead align-self-end small">
+            <span className="mr-3 text-dark">
+              <span>{this.props.post.numOfComments}</span>
+              <i className="far fa-comments ml-1"></i>
+            </span>
+            <span className="mr-3" style={{
+              color: "#e57373"
+            }}>
+              <span>0</span>
+              <i className="far fa-heart ml-1"></i>
+            </span>
+            <span className="mr-3" style={{
+              color: "#1565c0"
+            }}>
+              <span>0</span>
+              <i className="far fa-thumbs-up ml-1"></i>
+            </span>
+            <span className="mr-3" style={{
+              color: "#673ab7"
+            }}>
+              <span>0</span>
+              <i className="far fa-thumbs-down ml-1"></i>
+            </span>
           </div>
+        </div>
+        <div className="col-4 border-box">
+          asdasd
         </div>
       </CardStyle>
     )
@@ -44,8 +62,17 @@ export default class extends Component {
 }
 
 const CardStyle = styled.div `
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  &:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    transition: all .3s;
+  }
+  .border-box{
+    border-left: 2px solid #d32f2f;
+  }
   .title:hover{
     cursor: pointer;
     color: #ff8a65;

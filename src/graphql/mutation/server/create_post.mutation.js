@@ -11,6 +11,7 @@ mutation createPost($author_id:String!, $title:String!, $content:String!){
     }
     title
     created_at
+    numOfComments
   }
 }
 `

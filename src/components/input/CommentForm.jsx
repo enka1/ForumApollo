@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {compose, graphql, Mutation} from 'react-apollo'
+import {debounce} from 'lodash'
 import {Avatar} from 'antd'
 import styled from 'styled-components'
 
@@ -14,6 +15,25 @@ class CommentForm extends Component {
       isHover: false,
       comment: ''
     }
+  }
+  commentOnChangeHandle(event) {
+    debounce(() => {
+      this.setState({comment: event.target.value})
+    }, 300)
+  }
+  submitHandle(event, createComment) {
+    debounce(() => {
+      if (event.keyCode === 13) 
+        if (this.state.comment.trim().length > 0) {
+          createComment({
+            variables: {
+              user_id: this.props.user.id,
+              content: this.state.comment,
+              post_id: this.props.post_id
+            }
+          })
+        }
+      }, 300)
   }
   render() {
     if (this.props.user.id) 
@@ -45,26 +65,21 @@ class CommentForm extends Component {
             });
             this.setState({comment: ''})
           }}>
-            {(createComment) => (<input
-              value={this.state.comment}
-              onKeyUp={(e) => {
-              if (e.keyCode === 13) 
-                if (this.state.comment.trim().length > 0) 
-                  createComment({
-                    variables: {
-                      user_id: this.props.user.id,
-                      content: this.state.comment,
-                      post_id: this.props.post_id
-                    }
-                  })
+            {(createComment, {error}) => {
+              if (error) {
+                return "Error .error..."
+              }
+              return (<input
+                value={this.state.comment}
+                onKeyUp={e => this.submitHandle(e, createComment)}
+                onChange={this.commentOnChangeHandle}
+                onBlur={() => this.setState({isHover: false})}
+                onFocus={() => this.setState({isHover: true})}
+                placeholder="Viết bình luận..."
+                className={"comment form-control " + (this.state.isHover
+                ? "shadow"
+                : "")}/>)
             }}
-              onChange={(e) => this.setState({comment: e.target.value})}
-              onBlur={() => this.setState({isHover: false})}
-              onFocus={() => this.setState({isHover: true})}
-              placeholder="Viết bình luận..."
-              className={"comment form-control " + (this.state.isHover
-              ? "shadow"
-              : "")}/>)}
 
           </Mutation>
         </Comment>
