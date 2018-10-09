@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {graphql, compose} from 'react-apollo'
+import React, { Component } from 'react'
+import { graphql, compose } from 'react-apollo'
 import axios from 'axios'
 
-import {LoginBtnGroup, UserInfo} from '../components'
+import { LoginBtnGroup, UserInfo } from '../components'
 import USER_QUERY from '../graphql/query/client/user.query'
 import saveUser from '../graphql/mutation/client/save_user.mutation'
 class UserState extends Component {
@@ -27,15 +27,16 @@ class UserState extends Component {
       })
   }
   render() {
-    if (this.props.user.id) 
-      return (<UserInfo user={this.props.user} logOut={this.logOut}/>)
-    else 
-      return <LoginBtnGroup/>
+    const { user } = this.props
+    return user.id ?
+      (<UserInfo user={this.props.user} logOut={this.logOut} />)
+      :
+      <LoginBtnGroup />
   }
 }
 
-export default compose(graphql(saveUser, {name: 'saveUser'}), graphql(USER_QUERY, {
-  props: ({data: {
-      user
-    }}) => ({user})
+export default compose(graphql(saveUser, { name: 'saveUser' }), graphql(USER_QUERY, {
+  props: ({ data: {
+    user
+  } }) => ({ user })
 }))(UserState)

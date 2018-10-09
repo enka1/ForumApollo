@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {debounce} from 'lodash'
-import styled from 'styled-components'
+import React, {PureComponent} from 'react'
+import debounce from 'lodash.debounce'
 import {Divider} from 'antd'
+import styled from 'styled-components'
 
 import {history} from '../../routes'
 
-export default class Login extends Component {
+export default class Login extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,10 +13,22 @@ export default class Login extends Component {
       password: '',
       error: ''
     }
+    this.usernameOnChange = this
+      .usernameOnChange
+      .bind(this)
+    this.passwordOnChange = this
+      .passwordOnChange
+      .bind(this)
+    this.passwordOnChangeDebounce = debounce(password => this.setState({password}), 50)
   }
 
-  usernameOnChangeHandle(event) {
-    debounce(() => this.setState({username: event.target.value}), 300)
+  usernameOnChange(username) {
+    console.log('change username')
+    this.setState({username})
+  }
+
+  passwordOnChange(e) {
+    this.passwordOnChangeDebounce(e.target.value)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,28 +72,31 @@ export default class Login extends Component {
           </span>
           <span className="secondary-header mb-3 d-block text-muted">Social</span>
         </div>
-        <div className="form-group">
-          <input
-            value={this.state.username}
-            onChange={(e) => this.setState({username: e.target.value})}
-            className="form-control input"
-            placeholder="Username..."/>
-        </div>
-        <div className="form-group">
-          <input
-            value={this.state.password}
-            onChange={(e) => this.setState({password: e.target.value})}
-            className="form-control input"
-            type="password"
-            placeholder="Password...."
-            onKeyUp={(e) => {
-            if (e.keyCode === 13) {
-              this
-                .props
-                .localStrategyLoginHandle(this.state.username, this.state.password)
-            }
-          }}/>
-        </div>
+        <form>
+          <div className="form-group">
+            <input
+              autoComplete="username"
+              onChange={debounce(() => console.log('stop typing'), 500, {trailing: true})}
+              className="form-control input"
+              placeholder="Username..."/>
+          </div>
+          <div className="form-group">
+            <input
+              autoComplete={"current-password"}
+              value={this.state.password}
+              onChange={this.passwordOnChange}
+              className="form-control input"
+              type="password"
+              placeholder="Password...."
+              onKeyUp={(e) => {
+              if (e.keyCode === 13) {
+                this
+                  .props
+                  .localStrategyLoginHandle(this.state.username, this.state.password)
+              }
+            }}/>
+          </div>
+        </form>
         {this.state.error && (
           <p className="small mt-2 pl-1 text-left text-danger">
             <i className="mr-1 fas fa-exclamation-circle"></i>

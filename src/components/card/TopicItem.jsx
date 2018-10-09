@@ -1,36 +1,37 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import moment from 'moment'
-import {Avatar} from 'antd'
+import { Avatar } from 'antd'
 import styled from 'styled-components'
 
-import {history} from '../../routes'
+import { history } from '../../routes'
 
 export default class extends Component {
   render() {
+    const { post } = this.props
     return (
       <CardStyle className="row">
         <div className="col-8 d-flex align-items-center">
           <Avatar
-            title={this.props.post.creator.display_name}
+            title={post.creator.display_name}
             onClick={() => {
-            history.push(`/user/${this.props.post.creator.id}`)
-          }}
-            alt={this.props.post.creator.display_name}
+              history.push(`/user/${post.creator.id}`)
+            }}
+            alt={post.creator.display_name}
             size="large"
             className="mr-3 user"
             shape="circle"
-            src={this.props.post.creator.avatar}/>
+            src={post.creator.avatar} />
           <div>
             <p
               className="title"
               onClick={() => {
-              history.push(`/post/${this.props.post.id}`)
-            }}>{this.props.post.title}</p>
-            <p className="text-muted small m-0 lead">{moment(this.props.post.created_at).fromNow()}</p>
+                history.push(`/post/${post.id}`)
+              }}>{post.title}</p>
+            <p className="text-muted small m-0 lead">{moment(post.created_at).fromNow()}</p>
           </div>
           <div className="ml-auto lead align-self-end small">
             <span className="mr-3 text-dark">
-              <span>{this.props.post.numOfComments}</span>
+              <span>{post.numOfComments}</span>
               <i className="far fa-comments ml-1"></i>
             </span>
             <span className="mr-3" style={{
@@ -61,7 +62,7 @@ export default class extends Component {
   }
 }
 
-const CardStyle = styled.div `
+const CardStyle = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-top: 1rem;

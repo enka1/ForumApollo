@@ -81,10 +81,8 @@ export default class Login extends Component {
 
   registeredHandle() {
     this.validateInput()
-    if (check.emptyObject(this.state.error)) {
-      console.log("OK")
-    } else 
-      console.log("NOT")
+ 
+ 
   }
 
   render() {

@@ -15,8 +15,8 @@ export default class CommentList extends Component {
         {({data: {
             comments
           }}) => {
-          if (comments) {
-            return comments.map(comment => <CardItem
+          return comments
+            ? comments.map(comment => <CardItem
               className="mt-5"
               key={comment.id}
               createdAt={comment.created_at}
@@ -26,8 +26,7 @@ export default class CommentList extends Component {
               title={comment.creator.display_name}
               avatarURL={comment.creator.avatar}
               comment/>)
-          }
-          return null
+            : null
         }}
       </Query>
     )

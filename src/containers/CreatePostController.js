@@ -7,20 +7,20 @@ import {AddNewPostBtn} from '../components'
 
 class CreatePost extends Component {
   render() {
-    if (this.props.user.id) 
-      return (
+    const {user} = this.props
+    user.id
+      ? (
         <div className="d-flex justify-content-end my-3">
           <AddNewPostBtn/>
         </div>
       )
-    else 
-      return (
+      : (
         <div className="d-flex justify-content-end border-bottom py-4">
           <button
             className="lead btn btn-outline-dark"
             onClick={() => {
-              history.push('/login')
-            }}
+            history.push('/login')
+          }}
             style={{
             fontSize: .9 + "rem"
           }}>
